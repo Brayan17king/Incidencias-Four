@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.UnitOfWork;
+using Domain.Interfaces;
 
 namespace API.Extensions
 {
@@ -16,5 +18,9 @@ namespace API.Extensions
                 .AllowAnyHeader(); // WithHeaders("accept", "content-type")
             });
         }); // Remember to put 'static' on the class and to add builder.Services.ConfigureCors(); and app.UseCors("CorsPolicy"); to Program.cs
+        public static void AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+        }
     }
 }
