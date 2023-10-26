@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 
 namespace Application.Repositories
@@ -15,6 +16,11 @@ namespace Application.Repositories
         public MatriculaRepository(IncidenciaContext context) : base(context)
         {
             _context = context;
+        }
+        public override async Task<IEnumerable<Matricula>> GetAllAsync()
+        {
+            return await _context.Matriculas
+            .ToListAsync();
         }
     }
 }
